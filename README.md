@@ -35,9 +35,7 @@ server**, or starting a **bash session**.
 
 This approach is aimed at regular users, is the use the image to start a Rstudio
 server, which enable the user to start a Rstudio session within a web browser,
-with all currently functional RECON packages and their dependencies
-pre-installed. In short: you will be able to use the RECON packages without even
-installing R or Rstudio.
+with the devel version of *adegenet* and its dependencies pre-installed.
 
 This image is started by typing:
 ```
