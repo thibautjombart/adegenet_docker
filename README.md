@@ -31,14 +31,19 @@ are **two recommended ways** to use *adegenet* docker images: starting a **Rstud
 server**, or starting a **bash session**.
 
 
-### Rstudio server 
+### *adegenet_server* with a Rstudio session 
 
 This approach is aimed at regular users, and is meant to be used with the
 `adegenet_server` image. This image is used to start a Rstudio server, which
 enable the user to start a Rstudio session within a web browser, with the devel
 version of *adegenet* and its dependencies pre-installed.
 
-This image is started by typing:
+You can download / update the image by typing:
+```
+docker pull thibautjombart/adegenet_server
+```
+
+Then, to start image and use it to launch a local Rstudio server:
 ```
 docker run -d -p 8787:8787 thibautjombart/adegenet_server
 ```
@@ -50,13 +55,18 @@ URL `127.0.0.1:8787` (or `localhost:8787`). The login and password are
 
 
 
-### `bash` session
+### *adegenet_testing* and a `bash` session
 
 This approach is recommended for developers, and is especially useful for
 testing. It is meant to be used with the `adegenet_testing` image.  It will open
 a `bash` shell logged as `guest` within the `/home/guest`. A folder
 `/home/guest/dev` will contain git clones of the various installed packages. A R
 session can be started (without support for graphics) simply by typing `R`.
+
+You can download / update the image by typing:
+```
+docker pull thibautjombart/adegenet_testing
+```
 
 To start the docker image with a `bash` shell, type:
 ```
@@ -67,6 +77,11 @@ docker run --rm -it --user guest thibautjombart/adegenet_testing /bin/bash
 
 Building the docker image
 -------------------------
+
+Both images are kept up-to-date with adegenet devel automatically (any push to
+the github repository of *adegenet* triggers a new build). The example below is
+for building images locally, which can be useful to develop your own images
+based on the *adegenet* ones.
 
 This is an example building the `adegenet_testing` image, but the same can be
 applied to other images. Replace `thibautjombart` wherever appropriate by your
