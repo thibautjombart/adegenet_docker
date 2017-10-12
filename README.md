@@ -33,18 +33,19 @@ server**, or starting a **bash session**.
 
 ### Rstudio server 
 
-This approach is aimed at regular users, is the use the image to start a Rstudio
-server, which enable the user to start a Rstudio session within a web browser,
-with the devel version of *adegenet* and its dependencies pre-installed.
+This approach is aimed at regular users, and is meant to be used with the
+`adegenet_server` image. This image is used to start a Rstudio server, which
+enable the user to start a Rstudio session within a web browser, with the devel
+version of *adegenet* and its dependencies pre-installed.
 
 This image is started by typing:
 ```
-docker run -d -p 8787:8787 thibautjombart/adegenet
+docker run -d -p 8787:8787 thibautjombart/adegenet_server
 ```
 
 A Rstudio session can then be started by opening a web browser and going to the
 URL `127.0.0.1:8787` (or `localhost:8787`). The login and password are
-'rstudio'.
+'rstudio'. Also note that the port (8787) can be changed if necessary.
 
 
 
@@ -52,14 +53,14 @@ URL `127.0.0.1:8787` (or `localhost:8787`). The login and password are
 ### `bash` session
 
 This approach is recommended for developers, and is especially useful for
-testing. It will open a `bash` shell logged as `guest` within the
-`/home/guest`. A folder `/home/guest/dev` will contain git clones of the various
-installed packages. A R session can be started (without support for graphics)
-simply by typing `R`.
+testing. It is meant to be used with the `adegenet_testing` image.  It will open
+a `bash` shell logged as `guest` within the `/home/guest`. A folder
+`/home/guest/dev` will contain git clones of the various installed packages. A R
+session can be started (without support for graphics) simply by typing `R`.
 
 To start the docker image with a `bash` shell, type:
 ```
-docker run --rm -it --user guest thibautjombart/adegenet /bin/bash
+docker run --rm -it --user guest thibautjombart/adegenet_testing /bin/bash
 ```
 
 
@@ -67,19 +68,22 @@ docker run --rm -it --user guest thibautjombart/adegenet /bin/bash
 Building the docker image
 -------------------------
 
-To build this image, you first need to download the `Dockerfile`
-(`docker/testing/Dockerfile`), and then type:
+This is an example building the `adegenet_testing` image, but the same can be
+applied to other images. Replace `thibautjombart` wherever appropriate by your
+docker account. To build the image, you first need to download the `Dockerfile`
+(`docker/testing/Dockerfile`), and then type (from the folder where `Dockerfile`
+is present):
 
 ```
-docker build -t adegenet_devel testing/
+docker build -t adegenet_testing .
 ```
 
 To tag the image, then use:
 ```
-docker tag adegenet_devel thibautjombart/adegenet:latest
+docker tag adegenet_testing thibautjombart/adegenet_testing:latest
 ```
 
 To publish the image:
 ```
-docker push thibautjombart/adegenet:latest
+docker push thibautjombart/adegenet_testing:latest
 ```
